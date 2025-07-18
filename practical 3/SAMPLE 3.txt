@@ -1,0 +1,29 @@
+from sklearn.datasets import load_iris
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Load dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Apply PCA to reduce to 2 components
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X)
+
+# Convert to DataFrame for visualization
+df_pca = pd.DataFrame(data=X_pca, columns=['PC1', 'PC2'])
+df_pca['target'] = y
+
+# Plotting
+plt.figure(figsize=(8,6))
+for label in set(y):
+    plt.scatter(df_pca[df_pca['target']==label]['PC1'],
+                df_pca[df_pca['target']==label]['PC2'],
+                label=iris.target_names[label])
+plt.xlabel("Principal Component 1")
+plt.ylabel("Principal Component 2")
+plt.title("PCA on Iris Dataset")
+plt.legend()
+plt.show()

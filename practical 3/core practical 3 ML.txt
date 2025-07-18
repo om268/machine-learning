@@ -1,0 +1,118 @@
+Aim: Implement Dimensionality reduction using Principle Component Analysis
+(PCA) method.
+
+theory :
+
+Introduction:
+In many real-world applications, datasets have a large number of features (dimensions), which can make data analysis and visualization complex and computationally expensive. Dimensionality Reduction techniques are used to reduce the number of input variables while retaining the most important information.
+Principal Component Analysis (PCA) is one of the most widely used linear dimensionality reduction techniques in machine learning and data science.
+
+🔹 Definition of PCA:
+Principal Component Analysis (PCA) is a statistical method that transforms the original correlated features into a new set of uncorrelated features called principal components. These components capture the maximum variance in the data.
+
+🔹 Objectives of PCA:
+Reduce the dimensionality of data
+Retain maximum variance/information from original data
+Remove redundancy and noise
+Improve efficiency for machine learning models and visualization
+
+🔹 Key Concepts:
+Covariance Matrix:
+Measures the relationship (correlation) between different features in the data.
+Eigenvalues and Eigenvectors:
+Eigenvectors define the direction of new feature axes (principal components), and eigenvalues indicate the magnitude (importance) of these directions.
+
+Principal Components:
+
+The new axes after transformation.
+The first principal component accounts for the most variance, followed by the second, and so on.
+Variance Explained:
+A measure of how much information (variance) each principal component retains from the original data.
+
+🔹 Steps in PCA:
+Standardize the dataset:
+Scale the data so that each feature has zero mean and unit variance.
+Compute the covariance matrix.
+Calculate eigenvalues and eigenvectors.
+Sort eigenvectors by decreasing eigenvalues (importance).
+Select top-k eigenvectors to form a new matrix.
+Transform the original data using this matrix (i.e., project it onto the new axes).
+
+🔹 Advantages of PCA:
+Reduces computational cost
+Eliminates multicollinearity
+Useful for visualization (e.g., 2D or 3D plots)
+Enhances model performance by removing noise
+
+🔹 Limitations:
+PCA is a linear technique and may not capture nonlinear relationships.
+Components are not interpretable in terms of original features.
+Sensitive to the scaling of data.
+
+🔹 Applications:
+Image compression
+Face recognition
+Genomics and bioinformatics
+Exploratory data analysis
+Preprocessing for machine learning models
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+#import the breast _cancer dataset
+from sklearn.datasets import load_breast_cancer
+data=load_breast_cancer()
+data.keys()
+# Check the output classes
+print(data['target_names'])
+
+# Check the input attributes
+print(data['feature_names'])
+# construct a dataframe using pandas
+df1=pd.DataFrame(data['data'],columns=data['feature_names'])
+# Scale data before applying PCA
+scaling=StandardScaler()
+# Use fit and transform method
+scaling.fit(df1)
+Scaled_data=scaling.transform(df1)
+# Set the n_components=3
+principal=PCA(n_components=3)
+principal.fit(Scaled_data)
+x=principal.transform(Scaled_data)
+
+# Check the dimensions of data after PCA
+print(x.shape)
+
+# Check the values of eigen vectors
+# prodeced by principal components
+principal.components_
+plt.figure(figsize=(10,10))
+plt.scatter(x[:,0],x[:,1],c=data['target'],cmap='plasma')
+plt.xlabel('pc1')
+plt.ylabel('pc2')
+# import relevant libraries for 3d graph
+from mpl_toolkits.mplot3d import Axes3D
+fig = plt.figure(figsize=(10,10))
+# choose projection 3d for creating a 3d graph
+axis = fig.add_subplot(111, projection='3d')
+# x[:,0]is pc1,x[:,1] is pc2 while x[:,2] is pc3
+axis.scatter(x[:,0],x[:,1],x[:,2], c=data['target'],cmap='plasma')
+axis.set_xlabel("PC1", fontsize=10)
+axis.set_ylabel("PC2", fontsize=10)
+axis.set_zlabel("PC3", fontsize=10)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ Viva Questions
+
+What is the purpose of PCA?
+What is the difference between PCA and feature selection?
+What are eigenvalues and eigenvectors in PCA?
+Can PCA be used for classification?
+What are the limitations of PCA?
+
+

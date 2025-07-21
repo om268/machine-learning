@@ -1,0 +1,88 @@
+# Import libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import io
+
+# Load CSV file as a string to handle potential encoding issues
+with open("Sample_data.csv", 'r') as f:
+    csv_string = f.read()
+
+# Manually process the CSV string to create a DataFrame
+lines = csv_string.strip().split('\n')
+
+# Remove quotation marks from header elements
+header = [h.strip('"') for h in lines[0].split(',')]
+
+# Remove quotation marks from data elements
+data_rows = [[d.strip('"') for d in line.split(',')] for line in lines[1:]]
+
+df = pd.DataFrame(data_rows, columns=header)
+
+print("--- DataFrame Head ---")
+print(df.head())
+print("----------------------")
+
+print("--- DataFrame Info ---")
+print(df.info())
+print("----------------------")
+
+
+# Convert numeric columns to appropriate types
+numeric_cols = ['Sales', 'Profit', 'Units_Sold']
+for col in numeric_cols:
+    df[col] = pd.to_numeric(df[col], errors='coerce')
+
+# -------------------------------
+# 1. Line Plot - Monthly Sales
+# -------------------------------
+plt.figure(figsize=(10, 5))
+plt.plot(df['Month'], df['Sales'], marker='o', linestyle='-', color='green')
+plt.title("Monthly Sales Trend")
+plt.xlabel("Month")
+plt.ylabel("Sales")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+# -------------------------------
+# 2. Bar Plot - Profit by Month
+# -------------------------------
+plt.figure(figsize=(10, 5))
+sns.barplot(x='Month', y='Profit', data=df, palette='Blues_d')
+plt.title("Monthly Profit")
+plt.xlabel("Month")
+plt.ylabel("Profit")
+plt.tight_layout()
+plt.show()
+
+# -------------------------------
+# 3. Histogram - Units Sold
+# -------------------------------
+plt.figure(figsize=(6, 4))
+plt.hist(df['Units_Sold'], bins=6, color='orange', edgecolor='black')
+plt.title("Distribution of Units Sold")
+plt.xlabel("Units Sold")
+plt.ylabel("Frequency")
+plt.tight_layout()
+plt.show()
+
+# -------------------------------
+# 4. Box Plot - Sales by Region
+# -------------------------------
+plt.figure(figsize=(6, 4))
+sns.boxplot(x='Region', y='Sales', data=df)
+plt.title("Sales Distribution by Region")
+plt.tight_layout()
+plt.show()
+
+# -------------------------------
+# 5. Heatmap - Correlation Matrix
+# -------------------------------
+plt.figure(figsize=(6, 4))
+# Exclude non-numeric columns for correlation calculation
+corr = df[['Sales', 'Profit', 'Units_Sold']].corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation between Sales, Profit, and Units Sold")
+plt.tight_layout()
+plt.show()

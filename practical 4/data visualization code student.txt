@@ -1,0 +1,82 @@
+# Import libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Create a custom dataset
+data = {
+    'Name': ['Amit', 'Priya', 'John', 'Sara', 'Ravi', 'Neha', 'Alex', 'Kiran', 'Meena', 'Tom'],
+    'Math': [85, 90, 78, 88, 76, 95, 65, 70, 92, 80],
+    'Science': [80, 85, 75, 89, 72, 91, 67, 78, 90, 85],
+    'English': [78, 82, 74, 85, 69, 88, 72, 76, 91, 79],
+    'Gender': ['M', 'F', 'M', 'F', 'M', 'F', 'M', 'F', 'F', 'M']
+}
+
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+# -------------------------------
+# 1. Bar Chart - Math scores
+# -------------------------------
+plt.figure(figsize=(8, 5))
+plt.bar(df['Name'], df['Math'], color='skyblue')
+plt.title('Math Scores of Students')
+plt.xlabel('Students')
+plt.ylabel('Marks in Math')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# -------------------------------
+# 2. Histogram - Science scores
+# -------------------------------
+plt.figure(figsize=(6, 4))
+plt.hist(df['Science'], bins=5, color='lightgreen', edgecolor='black')
+plt.title('Distribution of Science Marks')
+plt.xlabel('Marks')
+plt.ylabel('Frequency')
+plt.tight_layout()
+plt.show()
+
+# -------------------------------
+# 3. Box Plot - All Subjects
+# -------------------------------
+plt.figure(figsize=(6, 5))
+sns.boxplot(data=df[['Math', 'Science', 'English']])
+plt.title('Box Plot of Subjects')
+plt.ylabel('Marks')
+plt.tight_layout()
+plt.show()
+
+# -------------------------------
+# 4. Scatter Plot - Math vs Science
+# -------------------------------
+plt.figure(figsize=(6, 5))
+sns.scatterplot(x='Math', y='Science', hue='Gender', data=df, s=100)
+plt.title('Math vs Science Scores')
+plt.xlabel('Math')
+plt.ylabel('Science')
+plt.tight_layout()
+plt.show()
+
+# -------------------------------
+# 5. Line Plot - English Marks Trend
+# -------------------------------
+plt.figure(figsize=(8, 5))
+plt.plot(df['Name'], df['English'], marker='o', color='purple')
+plt.title('English Marks Trend')
+plt.xlabel('Student')
+plt.ylabel('English Marks')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# -------------------------------
+# 6. Heatmap - Correlation between subjects
+# -------------------------------
+plt.figure(figsize=(6, 5))
+corr = df[['Math', 'Science', 'English']].corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f')
+plt.title('Correlation Matrix of Marks')
+plt.tight_layout()
+plt.show()

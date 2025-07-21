@@ -1,0 +1,85 @@
+# Import necessary libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load sample dataset
+df = sns.load_dataset('iris')  # Built-in dataset with 150 flower samples
+
+# Set seaborn style for better aesthetics
+sns.set(style="whitegrid")
+
+# ------------------------
+# 1. Line Plot
+# ------------------------
+print('Line Plot')
+plt.figure(figsize=(6, 4))
+plt.plot(df['sepal_length'], label='Sepal Length', color='green')
+plt.title('Line Plot of Sepal Length')
+plt.xlabel('Sample Index')
+plt.ylabel('Sepal Length (cm)')
+plt.legend()
+plt.show()
+
+# ------------------------
+# 2. Bar Plot
+# ------------------------
+print('Bar Plot')
+plt.figure(figsize=(6, 4))
+sns.barplot(x='species', y='sepal_length', data=df)
+plt.title('Bar Plot: Avg Sepal Length per Species')
+plt.xlabel('Species')
+plt.ylabel('Sepal Length (cm)')
+plt.show()
+
+# ------------------------
+# 3. Histogram
+# ------------------------
+print('Histogram Plot')
+plt.figure(figsize=(6, 4))
+plt.hist(df['petal_length'], bins=20, color='orange', edgecolor='black')
+plt.title('Histogram of Petal Length')
+plt.xlabel('Petal Length (cm)')
+plt.ylabel('Frequency')
+plt.show()
+
+# ------------------------
+# 4. Box Plot
+# ------------------------
+print('Box Plot')
+plt.figure(figsize=(6, 4))
+sns.boxplot(x='species', y='petal_width', data=df)
+plt.title('Box Plot: Petal Width per Species')
+plt.xlabel('Species')
+plt.ylabel('Petal Width (cm)')
+plt.show()
+
+# ------------------------
+# 5. Scatter Plot
+# ------------------------
+print('Scatter Plot')
+plt.figure(figsize=(6, 4))
+sns.scatterplot(x='sepal_length', y='sepal_width', hue='species', data=df)
+plt.title('Scatter Plot: Sepal Length vs Sepal Width')
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Sepal Width (cm)')
+plt.show()
+
+# ------------------------
+# 6. Pair Plot
+# ------------------------
+print('Pair Plot')
+sns.pairplot(df, hue='species')
+plt.suptitle('Pair Plot of Iris Dataset', y=1.02)
+plt.show()
+
+# ------------------------
+# 7. Heatmap (Correlation Matrix)
+# ------------------------
+print('Heatmap (Correlation Matrix)')
+plt.figure(figsize=(8, 6))
+# Exclude the 'species' column as it is not numeric
+corr = df.drop('species', axis=1).corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Heatmap: Feature Correlation')
+plt.show()

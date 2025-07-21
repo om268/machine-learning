@@ -1,0 +1,235 @@
+code :
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+first step :Creation and loading different datasets in Python
+
+import pandas as pd
+
+data = {
+    'Name': ['Jai', 'Princi', 'Princi', 'Gaurav', 'Anuj', 'Ravi', 'Natasha', 'Riya'],
+    'Age': [17, 17, 18, 17, 18, 17, 17, 18],
+    'Gender': ['M', 'F', 'M', 'M', 'M', 'F', 'F', 'F'],
+    'Marks': [90, 76, 'NaN', 74, 65, 'NaN', 71, 80]
+}
+
+df = pd.DataFrame(data)
+print(df)
+
+or : upload csv file 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#Write a python program to compute Mean, Median, Mode, Variance, Standard Deviation using Datasets
+
+# Import statistics library
+import statistics
+
+# Calculate average values
+print('Calculate the average from a sample of data')
+print(statistics.mean([1, 3, 5, 7, 9, 11, 13]))
+print(statistics.mean([1, 3, 5, 7, 9, 11]))
+print(statistics.mean([-11, 5.5, -3.4, 7.1, -9, 22]))
+print('------------------------------------')
+
+
+# Calculate middle values
+print('Calculate the middle from a sample of data')
+print(statistics.median([1, 3, 5, 7, 9, 11, 13]))
+print(statistics.median([1, 3, 5, 7, 9, 11]))
+print(statistics.median([-11, 5.5, -3.4, 7.1, -9, 22]))
+print('------------------------------------')
+
+
+# Calculate the mode
+print('Calculate the mode from a sample of data')
+print(statistics.mode([1, 3, 3, 3, 5, 7, 7, 9, 11]))
+print(statistics.mode([1, 1, 3, -5, 7, -9, 11]))
+print(statistics.mode(['red', 'green', 'blue', 'red']))
+print('------------------------------------')
+
+
+# Calculate the standard deviation from a sample of data
+print('Calculate the standard deviation from a sample of data')
+print(statistics.stdev([1, 3, 5, 7, 9, 11]))
+print(statistics.stdev([2, 2.5, 1.25, 3.1, 1.75, 2.8]))
+print(statistics.stdev([-11, 5.5, -3.4, 7.1]))
+print(statistics.stdev([1, 30, 50, 100]))
+print('------------------------------------')
+
+
+# Calculate the variance from a sample of data
+print('Calculate the variance from a sample of data')
+print(statistics.variance([1, 3, 5, 7, 9, 11]))
+print(statistics.variance([2, 2.5, 1.25, 3.1, 1.75, 2.8]))
+print(statistics.variance([-11, 5.5, -3.4, 7.1]))
+print(statistics.variance([1, 30, 50, 100]))
+print('------------------------------------')
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Demonstrate various data pre-processing techniques for a given dataset. Write a python
+program to compute
+i. Reshaping the data,
+ii. Filtering the data,
+iii. Merging the data
+iv. Handling the missing values in datasets
+v. Feature Normalization: Min-max normalization
+
+
+1.i. Reshaping the data,
+
+#1. reshaping the data 
+
+# Import pandas package
+import pandas as pd
+
+# Assign data
+data = {'Name': ['Jai', 'Princi', 'Gaurav',
+                 'Anuj', 'Ravi', 'Natasha', 'Riya'],
+        'Age': [17, 17, 18, 17, 18, 17, 17],
+        'Gender': ['M', 'F', 'M', 'M', 'M', 'F', 'F'],
+        'Marks': [90, 76, 'NaN', 74, 65, 'NaN', 71]}
+
+# Convert into DataFrame
+df = pd.DataFrame(data)
+
+# Display data
+df
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+2.Filtering the data,
+
+#2.filtering the data
+
+df.filter(['Name'])
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+3.Merging the data
+
+creating 2 table first 
+
+#3.Merging the data 
+
+# import module
+import pandas as pd
+
+print('first table')
+
+# creating DataFrame for Student Details
+details = pd.DataFrame({
+    'ID': [101, 102, 103, 104, 105, 106,
+           107, 108, 109, 110],
+    'NAME': ['Jagroop', 'Praveen', 'Harjot',
+             'Pooja', 'Rahul', 'Nikita',
+             'Saurabh', 'Ayush', 'Dolly', 'Mohit'],
+    'BRANCH': ['CSE', 'CSE', 'CSE', 'CSE',
+               'CSE', 'CSE', 'CSE', 'CSE', 'CSE', 'CSE']
+})
+
+# printing details
+print(details)
+
+print('-------------------------------------------------')
+
+print("second table")
+
+# Creating DataFrame for Fees_Status
+fees_status = pd.DataFrame(
+    {'ID': [101, 102, 103, 104, 105, 106, 107, 108, 109, 110],
+     'PENDING': ['5000', '250', 'NIL', '9000', '15000', 'NIL',
+                 '4500', '1800', '250', 'NIL']}
+)
+
+# Printing fees_status
+print(fees_status)
+
+print('-------------------------------------------------')
+
+print('Merging the data base on ID ')
+print(pd.merge(details, fees_status, on='ID'))
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#iv. Handling the missing values in datasets
+
+# Import module
+import pandas as pd
+import numpy as np
+
+# Creating DataFrame for Fees_Status
+fees_status = pd.DataFrame(
+    {'ID': [101, 102, 103, 104, 105,
+            106, 107, 108, 109, 110],
+     'PENDING': [5000, 250, np.nan,
+                 9000, 15000, np.nan,
+                 4500, 1800, 250, np.nan]}
+)
+
+# Printing fees_status
+fees_status
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+#handle missing values with mean 
+
+import numpy as np
+import pandas as pd
+
+# A dictionary with list as values
+GFG_dict = {
+    'G1': [10, 20, 30, 40],
+    'G2': [25, np.nan, np.nan, 29],
+    'G3': [15, 14, 17, 11],
+    'G4': [21, 22, 23, 25]
+}
+
+# Create a DataFrame from dictionary
+gfg = pd.DataFrame(GFG_dict)
+
+# Finding the mean of the column having NaN
+mean_value = gfg['G2'].mean()
+
+# Replace NaNs in column G2 with the mean of values in the same column
+gfg['G2'].fillna(value=mean_value, inplace=True)
+
+print('Updated Dataframe:')
+print(gfg)
+
+
+_____________________________________________________________________________________________________________________
+
+5. normalization :
+
+# Import necessary libraries
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+
+# Create a sample DataFrame
+data = {'Math': [72, 81, 90, 65, 75],
+        'Science': [88, 72, 95, 70, 85],
+        'English': [78, 83, 88, 64, 76]}
+
+df = pd.DataFrame(data)
+print("Original Data:\n", df)
+
+# Create a MinMaxScaler object
+scaler = MinMaxScaler()
+
+# Fit and transform the data
+normalized_data = scaler.fit_transform(df)
+
+# Create a new DataFrame with normalized values
+normalized_df = pd.DataFrame(normalized_data, columns=df.columns)
+
+print("\nNormalized Data (Min-Max):\n", normalized_df)
+
+
+
+
+
+
+
+

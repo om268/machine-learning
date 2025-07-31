@@ -1,0 +1,367 @@
+1. Simple Linear Regression
+
+📌 Problem: Predict a student's score based on the number of study hours.
+
+🧪 Code:
+
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Sample data: Study Hours vs Score
+X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)  # Independent variable (Hours)
+y = np.array([10, 20, 30, 40, 50])           # Dependent variable (Score)
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict
+y_pred = model.predict(X)
+
+# Output results
+print("Coefficient (slope):", model.coef_[0])
+print("Intercept:", model.intercept_)
+
+# Plot
+plt.scatter(X, y, color='blue', label='Actual')
+plt.plot(X, y_pred, color='red', label='Predicted Line')
+plt.xlabel('Study Hours')
+plt.ylabel('Score')
+plt.title('Simple Linear Regression')
+plt.legend()
+plt.show()
+
+
+---
+
+✅ 2. Multiple Linear Regression
+
+📌 Problem: Predict house price based on area, number of bedrooms, and age of the house.
+
+🧪 Code:
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+# Sample data
+data = {
+    'Area': [1000, 1500, 2000, 2500, 3000],
+    'Bedrooms': [2, 3, 4, 4, 5],
+    'Age': [5, 10, 15, 20, 25],
+    'Price': [300000, 400000, 500000, 600000, 650000]
+}
+
+df = pd.DataFrame(data)
+
+# Features and target
+X = df[['Area', 'Bedrooms', 'Age']]  # Independent variables
+y = df['Price']                      # Dependent variable
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict
+predictions = model.predict(X)
+
+# Output results
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+
+# Display predicted prices
+df['Predicted Price'] = predictions
+print(df)
+
+
+
+_-----------------------------------------------
+
+
+What is Regression?
+
+Regression is a statistical method used in Machine Learning to model the relationship between a dependent variable (target) and one or more independent variables (features).
+
+👉 It helps in predicting continuous values, such as:
+
+Predicting house prices 🏠
+
+Forecasting sales 📈
+
+Estimating salary based on experience 💼
+
+
+
+---
+
+🔷 Types of Regression
+
+Type	Description
+
+1. Simple Linear Regression	Uses one independent variable to predict the target variable.
+2. Multiple Linear Regression	Uses two or more independent variables to predict the target.
+3. Polynomial Regression	Fits a curved line to the data (non-linear).
+4. Ridge/Lasso Regression	Linear regression with regularization to avoid overfitting.
+5. Logistic Regression	Used for classification, not regression. (Yes/No, True/False) ⚠️
+
+
+------------------------------@@--------------
+
+1. Simple Linear Regression – Code Explanation
+
+📌 Objective:
+
+Predict score based on hours studied.
+
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+👉 Importing libraries:
+
+matplotlib for plotting
+
+LinearRegression from sklearn
+
+numpy for array operations
+
+
+X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
+y = np.array([10, 20, 30, 40, 50])
+
+👉 X: Study hours
+👉 y: Scores
+.reshape(-1, 1) makes it a 2D array for sklearn.
+
+model = LinearRegression()    # Creating model object
+model.fit(X, y)               # Training the model
+
+👉 This trains the regression model using the data.
+
+y_pred = model.predict(X)     # Predicting values
+
+print("Coefficient (slope):", model.coef_[0])
+print("Intercept:", model.intercept_)
+
+👉 Shows the regression equation:
+y = slope × x + intercept
+
+plt.scatter(X, y, color='blue', label='Actual')        # Actual points
+plt.plot(X, y_pred, color='red', label='Predicted')    # Regression line
+plt.xlabel('Study Hours')
+plt.ylabel('Score')
+plt.title('Simple Linear Regression')
+plt.legend()
+plt.show()
+
+👉 Plotting actual data points and regression line.
+
+
+---
+
+✅ 2. Multiple Linear Regression – Code Explanation
+
+📌 Objective:
+
+Predict house price using:
+
+Area
+
+Bedrooms
+
+Age
+
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+data = {
+    'Area': [1000, 1500, 2000, 2500, 3000],
+    'Bedrooms': [2, 3, 4, 4, 5],
+    'Age': [5, 10, 15, 20, 25],
+    'Price': [300000, 400000, 500000, 600000, 650000]
+}
+df = pd.DataFrame(data)
+
+👉 Create a dataset as a DataFrame (table).
+
+X = df[['Area', 'Bedrooms', 'Age']]   # Independent variables
+y = df['Price']                       # Dependent variable
+
+👉 X contains multiple features.
+
+model = LinearRegression()
+model.fit(X, y)
+
+👉 Training the model on the data.
+
+predictions = model.predict(X)
+
+👉 Predicting prices based on model.
+
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+
+👉 Formula:
+Price = (a × Area) + (b × Bedrooms) + (c × Age) + intercept
+
+df['Predicted Price'] = predictions
+print(df)
+
+👉 Shows a table comparing actual and predicted prices.
+
+
+------+++++++-------+++++--------++++++++++--------+++++++---------++++++++------++-+-------+--
+
+What is sklearn?
+
+scikit-learn (imported as sklearn) is a popular Machine Learning library in Python.
+It provides tools for:
+
+Supervised learning (Regression, Classification)
+
+Unsupervised learning (Clustering, Dimensionality Reduction)
+
+Model evaluation
+
+Data preprocessing
+
+
+✅ It is easy to use and works well with NumPy and Pandas.
+
+
+---
+
+✅ Let's now explain the Simple Linear Regression code:
+
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+🧠 Explanation:
+
+matplotlib.pyplot: For plotting graphs
+
+LinearRegression: ML model for regression (from sklearn)
+
+numpy: To create and manipulate arrays
+
+
+
+---
+
+X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
+y = np.array([10, 20, 30, 40, 50])
+
+🧠 Explanation:
+
+X: This is your input feature (e.g., study hours)
+
+y: This is the target or output (e.g., score)
+
+.reshape(-1, 1): Converts the 1D array to a 2D array (required by sklearn)
+
+
+
+---
+
+model = LinearRegression()
+
+🧠 Explanation:
+
+Creates a LinearRegression model object.
+
+
+
+---
+
+model.fit(X, y)
+
+🧠 Explanation:
+
+Trains the model using the given data (X and y).
+
+It finds the best-fit line:
+
+
+y = mx + c
+
+
+---
+
+y_pred = model.predict(X)
+
+🧠 Explanation:
+
+Uses the trained model to predict scores based on input hours (X).
+
+Returns an array of predicted values.
+
+
+
+---
+
+print("Coefficient (slope):", model.coef_[0])
+print("Intercept:", model.intercept_)
+
+🧠 Explanation:
+
+.coef_: Shows the slope (m) of the regression line.
+
+.intercept_: Shows the y-intercept (c).
+
+
+➡️ So the model learned:
+
+\text{Score} = m \times \text{Hours} + c
+
+
+---
+
+plt.scatter(X, y, color='blue', label='Actual')
+plt.plot(X, y_pred, color='red', label='Predicted Line')
+plt.xlabel('Study Hours')
+plt.ylabel('Score')
+plt.title('Simple Linear Regression')
+plt.legend()
+plt.show()
+
+🧠 Explanation:
+
+plt.scatter(): Draws the actual data points (blue dots)
+
+plt.plot(): Draws the regression line (red line)
+
+Adds labels, title, and legend to the graph
+
+plt.show(): Displays the graph
+
+
+
+---
+
+✅ Summary of Key Functions in Code
+
+Function	Purpose
+
+LinearRegression()	Create a linear model
+model.fit(X, y)	Train the model
+model.predict(X)	Predict output
+model.coef_	Get the slope
+model.intercept_	Get the y-intercept
+plt.scatter()	Plot actual points
+plt.plot()	Plot predicted line
+
+
+What is plt.legend()?
+
+The plt.legend() function in Matplotlib is used to show a small legend box that explains what each color or line means in your graph.
+
+In the above code:
+
+'Actual Data' (blue points) → Original data
+
+'Regression Line' (red line) → Predicted line by model
+
+
+👉 This makes your graph easier to read and understand — especially useful in presentations or reports! 🧑‍🏫📊

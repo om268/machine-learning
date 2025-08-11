@@ -1,0 +1,44 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+import matplotlib.pyplot as plt
+
+# Step 1: Create a sample dataset
+data = {
+    'Age': [22, 25, 47, 52, 46, 56, 55, 60, 48, 33],
+    'Salary': [25000, 50000, 80000, 110000, 70000, 150000, 95000, 130000, 85000, 62000],
+    'BuysCar': ['No', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No']
+}
+
+df = pd.DataFrame(data)
+print("Dataset:\n", df)
+
+# Step 2: Convert target to numbers (Yes=1, No=0)
+df['BuysCar'] = df['BuysCar'].map({'No': 0, 'Yes': 1})
+
+# Step 3: Features (X) and Target (y)
+X = df[['Age', 'Salary']]
+y = df['BuysCar']
+
+# Step 4: Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Step 5: Create and train Decision Tree
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+# Step 6: Accuracy
+accuracy = model.score(X_test, y_test)
+print("Model Accuracy:", accuracy)
+
+# Step 7: Predict new sample
+new_sample = [[40, 90000]]  # Age=40, Salary=90000
+prediction = model.predict(new_sample)
+print("Predicted (1=Yes, 0=No):", prediction)
+
+# Step 8: Visualize the Decision Tree
+plt.figure(figsize=(8,5))
+plot_tree(model, feature_names=['Age', 'Salary'], class_names=['No', 'Yes'], filled=True)
+plt.show()

@@ -1,0 +1,88 @@
+Aim
+To develop a Decision Tree Classification model for a given dataset and use it to classify a new sample.
+
+Theory
+A Decision Tree is a supervised machine learning algorithm used for classification and regression.
+It works by splitting the dataset into smaller subsets based on certain decision rules, forming a tree-like structure.
+Each internal node of the tree represents a decision based on a feature, each branch represents the outcome of that decision, and each leaf node represents the final class label.
+
+Key Points
+Decision trees use algorithms like ID3, CART, or C4.5 to split data.
+Splitting is based on metrics like:
+Gini Index – measures impurity.
+Entropy & Information Gain – measure disorder and improvement after split.
+
+Advantages:
+
+Easy to understand and visualize.
+Works well with both numerical and categorical data.
+
+Disadvantages:
+Can overfit the data if not pruned.
+Sensitive to noisy data.
+
+Example:
+Imagine you are deciding whether to play outside.
+
+Is it raining? → No → Yes, play outside.
+Is it raining? → Yes → Do you have an umbrella? → Yes → Play outside; No → Stay home.
+
+Algorithm Steps
+Load and prepare dataset.
+Select a feature to split the dataset based on maximum information gain or minimum Gini index.
+Repeat the process for each branch until:
+All samples are classified, or
+A stopping criterion is met.
+Use the trained tree to predict the class for a new sample.
+
+code :
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+import matplotlib.pyplot as plt
+
+# Load dataset
+df = pd.read_csv("sample_decision_tree.csv")
+print(df.head())
+
+# Features and target
+X = df.drop('target', axis=1)
+y = df['target']
+
+# Split into train & test sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Create and train Decision Tree model
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+# Test accuracy
+accuracy = model.score(X_test, y_test)
+print("Model Accuracy:", accuracy)
+
+# Classify a new sample
+# Example: Sepal length=5.1, Sepal width=3.5, Petal length=1.4, Petal width=0.2
+new_sample = [[5.1, 3.5, 1.4, 0.2]]
+prediction = model.predict(new_sample)
+print("Predicted Class:", prediction)
+
+# Visualize the Decision Tree
+plt.figure(figsize=(12,8))
+plot_tree(model, feature_names=X.columns, class_names=['Setosa', 'Versicolor', 'Virginica'], filled=True)
+plt.show()
+
+
+Output
+Accuracy: Shows how well the model performs on test data.
+
+Predicted Class: The classification result for the new sample.
+
+Decision Tree Graph: A visual representation of how the model makes decisions.
+
+Conclusion
+The Decision Tree model successfully classified the new sample based on the patterns learned from the training dataset.
+Decision Trees are simple, easy to interpret, and effective for classification problems, but care must be taken to avoid overfitting by using pruning techniques.
+

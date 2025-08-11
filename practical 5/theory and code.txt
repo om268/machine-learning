@@ -1,0 +1,147 @@
+
+What is Regression?
+
+Regression is a statistical method used in Machine Learning to model the relationship between a dependent variable (target) and one or more independent variables (features).
+
+👉 It helps in predicting continuous values, such as:
+
+Predicting house prices 🏠
+
+Forecasting sales 📈
+
+Estimating salary based on experience 💼
+
+🔷 Types of Regression
+
+Type	Description
+
+1. Simple Linear Regression	Uses one independent variable to predict the target variable.
+2. Multiple Linear Regression	Uses two or more independent variables to predict the target.
+3. Polynomial Regression	Fits a curved line to the data (non-linear).
+4. Ridge/Lasso Regression	Linear regression with regularization to avoid overfitting.
+5. Logistic Regression	Used for classification, not regression. (Yes/No, True/False) ⚠️
+
+Steps to Implement Regression
+
+🔹 a. Import Libraries
+
+Use libraries like numpy, pandas, matplotlib, and scikit-learn.
+
+🔹 b. Load Dataset
+
+Load the data using pandas.read_csv() or create a small dataset manually.
+
+🔹 c. Preprocess Data
+
+Check for missing values.
+
+Split the data into input (X) and output (y).
+
+Normalize/scale if required.
+
+🔹 d. Split Data
+
+Split the dataset into training and testing sets using train_test_split().
+
+🔹 e. Train the Model
+
+Use LinearRegression() from sklearn.linear_model.
+
+🔹 f. Predict Values
+
+Use .predict() to make predictions on test data.
+
+🔹 g. Evaluate the Model
+
+Use metrics like:
+
+Mean Squared Error (MSE)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+COde: 
+
+1. Simple Linear Regression
+
+📌 Problem: Predict a student's score based on the number of study hours.
+
+🧪 Code:
+
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Sample data: Study Hours vs Score
+X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)  # Independent variable (Hours)
+y = np.array([10, 20, 30, 40, 50])           # Dependent variable (Score)
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict
+y_pred = model.predict(X)
+
+# Output results
+print("Coefficient (slope):", model.coef_[0])
+print("Intercept:", model.intercept_)
+
+# Plot
+plt.scatter(X, y, color='blue', label='Actual')
+plt.plot(X, y_pred, color='red', label='Predicted Line')
+plt.xlabel('Study Hours')
+plt.ylabel('Score')
+plt.title('Simple Linear Regression')
+plt.legend()
+plt.show()
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+2. Multiple Linear Regression
+
+📌 Problem: Predict house price based on area, number of bedrooms, and age of the house.
+
+🧪 Code:
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+# Sample data
+data = {
+    'Area': [1000, 1500, 2000, 2500, 3000],
+    'Bedrooms': [2, 3, 4, 4, 5],
+    'Age': [5, 10, 15, 20, 25],
+    'Price': [300000, 400000, 500000, 600000, 650000]
+}
+
+df = pd.DataFrame(data)
+
+# Features and target
+X = df[['Area', 'Bedrooms', 'Age']]  # Independent variables
+y = df['Price']                      # Dependent variable
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict
+predictions = model.predict(X)
+
+# Output results
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+
+# Display predicted prices
+df['Predicted Price'] = predictions
+print(df)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Conclusion
+
+Simple and Multiple Linear Regression are foundational techniques in statistics and machine learning. While Simple Linear Regression helps in understanding basic relationships between two variables, Multiple Linear Regression helps in building predictive models with multiple influencing factors.
+
+These models are widely used in finance, healthcare, marketing, education, and many other fields.

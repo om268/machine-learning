@@ -1,0 +1,65 @@
+AIM
+To develop and evaluate a Logistic Regression model for a given dataset to classify data into two categories.
+
+THEORY
+Logistic Regression is a statistical method used for binary classification, meaning it predicts whether something belongs to one of two classes (e.g., Yes/No, 0/1).
+It works by using a sigmoid function that converts the output of a linear equation into a value between 0 and 1, which can be interpreted as a probability.
+If the probability is greater than 0.5, the model predicts Class 1, otherwise Class 0.
+
+Logistic Regression is widely used in fields like medical diagnosis (disease/no disease), marketing (buy/don’t buy), and finance (default/no default).
+
+Logistic Regression is a machine learning algorithm used for classifying data into two categories.
+It predicts the probability of an event using the sigmoid function.
+If probability > 0.5 → Class 1, else → Class 0.
+
+the sigmoid function (also called the logistic function) is a mathematical formula that takes any real number and converts it into a value between 0 and 1.
+
+In logistic regression, the sigmoid function helps turn raw predictions into probabilities, which makes it easy to decide Class 0 or Class 1.
+
+Key Points:
+
+Output is between 0 and 1.
+A threshold (commonly 0.5) is used to decide the final class.
+Works well for linearly separable data.
+Common evaluation metrics: Accuracy, Precision, Recall, F1-score.
+
+Applications:
+
+Email spam detection
+Medical diagnosis (disease prediction)
+Credit risk assessment
+
+
+code :
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+# Load dataset
+df = pd.read_csv("sample_logistic_regression.csv")
+print(df.head())
+
+# Features and target
+X = df[['Age', 'Salary']]
+y = df['Purchased']
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Logistic Regression model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Evaluation
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("Classification Report:\n", classification_report(y_test, y_pred))
+
+
+CONCLUSION
+The Logistic Regression model successfully classified the given dataset with an accuracy of X%. It demonstrates the applicability of logistic regression in solving binary classification problems such as prediction, diagnosis, and risk assessment.

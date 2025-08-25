@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.cluster import KMeans
+
+# Step 1: Load Iris dataset
+iris = load_iris()
+X = iris.data  # Features (sepal length, sepal width, petal length, petal width)
+
+# Step 2: Apply KMeans
+kmeans = KMeans(n_clusters=3, random_state=0)  # 3 clusters (since 3 iris species)
+kmeans.fit(X)
+
+# Step 3: Get labels and centers
+labels = kmeans.labels_
+centers = kmeans.cluster_centers_
+
+# Step 4: Convert to DataFrame for better understanding
+df = pd.DataFrame(X, columns=iris.feature_names)
+df['Cluster'] = labels
+print(df.head())
+
+# Step 5: Visualization (using first 2 features)
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='rainbow', s=30)
+plt.scatter(centers[:, 0], centers[:, 1], c='black', marker='X', s=200, label="Centroids")
+plt.xlabel("Sepal Length")
+plt.ylabel("Sepal Width")
+plt.title("K-Means Clustering on Iris Dataset")
+plt.legend()
+plt.show()

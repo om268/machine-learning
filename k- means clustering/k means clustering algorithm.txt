@@ -1,0 +1,82 @@
+Aim:
+
+theory :
+
+Theory:
+
+Clustering is an unsupervised learning technique that groups similar data points into clusters.
+K-Means is the most popular clustering algorithm.
+It partitions data into K clusters, where each data point belongs to the nearest cluster centroid.
+
+
+Steps of K-Means Algorithm:
+
+Choose the number of clusters 𝐾
+Randomly initialize 𝐾 centroids.
+Assign each data point to the nearest centroid.
+Recalculate centroids as the mean of all points in that cluster.
+Repeat steps 3–4 until centroids do not change much (convergence).
+
+1. Introduction
+
+Clustering is an unsupervised machine learning technique used to group data points into clusters such that:
+Points in the same cluster are more similar to each other.
+Points in different clusters are dissimilar.
+K-Means is one of the most popular clustering algorithms. It works by partitioning the dataset into K clusters, where each data point belongs to the nearest cluster centroid.
+
+2. Characteristics of K-Means
+
+It is an unsupervised learning algorithm (no labels required).
+It is centroid-based (clusters formed around central points).
+Works best when clusters are spherical and evenly sized.
+Used widely in market segmentation, image compression, anomaly detection, document clustering, etc.
+
+Applications
+
+Customer segmentation (grouping customers based on behavior).
+Image compression (reducing colors by clustering pixel values).
+Anomaly detection (identifying unusual patterns).
+Document clustering (grouping similar articles, research papers).
+
+Code :
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.cluster import KMeans
+
+# Step 1: Load Iris dataset
+iris = load_iris()
+X = iris.data  # Features (sepal length, sepal width, petal length, petal width)
+
+# Step 2: Apply KMeans
+kmeans = KMeans(n_clusters=3, random_state=0)  # 3 clusters (since 3 iris species)
+kmeans.fit(X)
+
+# Step 3: Get labels and centers
+labels = kmeans.labels_
+centers = kmeans.cluster_centers_
+
+# Step 4: Convert to DataFrame for better understanding
+df = pd.DataFrame(X, columns=iris.feature_names)
+df['Cluster'] = labels
+print(df.head())
+
+# Step 5: Visualization (using first 2 features)
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='rainbow', s=30)
+plt.scatter(centers[:, 0], centers[:, 1], c='black', marker='X', s=200, label="Centroids")
+plt.xlabel("Sepal Length")
+plt.ylabel("Sepal Width")
+plt.title("K-Means Clustering on Iris Dataset")
+plt.legend()
+plt.show()
+
+
+conclusion : The K-Means clustering algorithm successfully groups data points into clusters based on their similarity. It works by iteratively assigning points to the nearest centroid and updating centroids until convergence.
+
+From the implementation, we can conclude that:
+K-Means is a simple and efficient unsupervised learning algorithm.
+It helps in discovering hidden patterns and natural groupings in data.
+The results depend on the choice of K (number of clusters), which can be determined using methods like the Elbow method or Silhouette score.
+While effective, it has limitations such as sensitivity to outliers and varying cluster shapes/sizes.
+
